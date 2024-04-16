@@ -2,6 +2,7 @@ function onScanSuccess(decodedText, decodedResult) {
   // Handle on success condition with the decoded text or result.
   document.querySelector('#result').innerText = decodedText;
   speak(decodedText);
+  html5QrcodeScanner.clear();
 }
 
 function speak(text) {
