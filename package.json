@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "tesseract.js": "^5.0.5",
-    "html5-qrcode": "^2.3.8"
+    "@undecaf/barcode-detector-polyfill": "^0.9.20"
   }
 }

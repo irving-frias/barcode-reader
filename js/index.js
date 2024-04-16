@@ -1,23 +1,53 @@
-function onScanSuccess(decodedText, decodedResult) {
-  // Handle on success condition with the decoded text or result.
-  document.querySelector('#result').innerText = decodedText;
-  speak(decodedText);
-  html5QrcodeScanner.clear();
+// check compatibility
+if (!("BarcodeDetector" in globalThis)) {
+  console.log("Barcode Detector is not supported by this browser.");
+} else {
+  console.log("Barcode Detector supported!");
+
+  // create new detector
+  const barcodeDetector = new BarcodeDetector();
+
+  // get video element
+  const video = document.getElementById("barcodevideo");
+
+  // get canvas element
+  const canvas = document.getElementById("barcodecanvas");
+
+  // get result element
+  const result = document.getElementById("result");
+
+  // start video
+  navigator.mediaDevices
+  .getUserMedia({ video: true })
+  .then((stream) => {
+    video.srcObject = stream;
+  })
+  .catch((e) => {
+    console.error("Boo, getUserMedia failed: " + e);
+  });
+
+  video.addEventListener("canplay", () => {
+    console.log("Video is playing...");
+
+    setInterval(function() {
+      snapshot(canvas, video, barcodeDetector, result);
+    }, 200);
+  }, false);
 }
+let timer;
+function snapshot(canvas, video, barcodeDetector, result) {
+  const context = canvas.getContext("2d");
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-function speak(text) {
-  // Create a SpeechSynthesisUtterance
-  const utterance = new SpeechSynthesisUtterance(text);
-
-  // Select a voice
-  const voices = speechSynthesis.getVoices();
-  utterance.voice = voices[0]; // Choose a specific voice
-
-  // Speak the text
-  speechSynthesis.speak(utterance);
+  barcodeDetector
+  .detect(video)
+  .then((barcodes) => {
+    console.log(barcodes);
+    if (barcodes.length) {
+      result.innerHTML = barcodes[0].rawValue;
+    }
+  })
+  .catch((e) => {
+    console.error("Boo, BarcodeDetection failed: " + e);
+  })
 }
-
-
-var html5QrcodeScanner = new Html5QrcodeScanner(
-"reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess);

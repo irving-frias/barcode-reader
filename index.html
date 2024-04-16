@@ -3,13 +3,23 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Barcode</title>
 </head>
 <body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-	<div id="reader" style="width:500px"></div>
-	<div id="result"></div>
+	<video id="barcodevideo" autoplay></video>
+	<canvas id="barcodecanvas" style="display: none;"></canvas>
+	<h2 id="result"></h2>
 
-	<script src="/js/html5-qrcode.min.js"></script>
+	<script src="./js/zbar-wasm.js"></script>
+	<script src="./js/barcode-detector-polyfill.js"></script>
+	<script>
+    try {
+        window['BarcodeDetector'].getSupportedFormats()
+    } catch {
+        window['BarcodeDetector'] = barcodeDetectorPolyfill.BarcodeDetectorPolyfill
+    }
+	</script>
+
 	<script src="/js/index.js"></script>
 </body>
 </html>
