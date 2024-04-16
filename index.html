@@ -1,43 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="style.css" />
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="barcode.js"></script>
-
-<script type="text/javascript">
-
-var sound = new Audio("barcode.wav");
-
-$(document).ready(function() {
-
-	barcode.config.start = 0.1;
-	barcode.config.end = 0.9;
-	barcode.config.video = '#barcodevideo';
-	barcode.config.canvas = '#barcodecanvas';
-	barcode.config.canvasg = '#barcodecanvasg';
-	barcode.setHandler(function(barcode) {
-		$('#result').html(barcode);
-	});
-	barcode.init();
-
-	$('#result').bind('DOMSubtreeModified', function(e) {
-		sound.play();	
-	});
-
-});
-
-</script>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
-<body>
+<body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+	<div id="reader" style="width:500px"></div>
+	<div id="result"></div>
 
-<div id="barcode">
-	<video id="barcodevideo" autoplay></video>
-	<canvas id="barcodecanvasg" ></canvas>
-</div>
-<canvas id="barcodecanvas" ></canvas>
-<div id="result"></div>
-
+	<script src="./node_modules/html5-qrcode/html5-qrcode.min.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
