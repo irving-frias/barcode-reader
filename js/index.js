@@ -18,7 +18,9 @@ if (!("BarcodeDetector" in globalThis)) {
 
   // start video
   navigator.mediaDevices
-  .getUserMedia({ video: true })
+  .getUserMedia({ video: {
+    facingMode: 'environment'
+  }})
   .then((stream) => {
     video.srcObject = stream;
   })
