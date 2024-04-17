@@ -5,8 +5,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Barcode</title>
 	<script src="./js/mediaDevices-getUserMedia-polyfill.js" defer></script>
+
+	<style>
+		html, body{
+			margin: 0;
+			padding: 0;
+		}
+
+		video{
+			width: 100%;
+			object-fit: contain;
+			height: 75vh;
+		}
+	</style>
 </head>
-<body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+<body style="display: flex; flex-direction: column; align-items: center; height: 100vh;">
 	<video id="barcodevideo" autoPlay playsInline muted></video>
 	<canvas id="barcodecanvas" style="display: none;"></canvas>
 	<h2 id="result"></h2>
