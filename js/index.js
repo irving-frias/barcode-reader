@@ -33,7 +33,7 @@ if (!("BarcodeDetector" in globalThis)) {
 
     setInterval(function() {
       snapshot(canvas, video, barcodeDetector, result);
-    }, 200);
+    }, 250);
   }, false);
 }
 let timer;

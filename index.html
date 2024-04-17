@@ -4,9 +4,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Barcode</title>
+	<script src="./js/mediaDevices-getUserMedia-polyfill.js" defer></script>
 </head>
 <body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-	<video id="barcodevideo" autoplay></video>
+	<video id="barcodevideo" autoPlay playsInline muted></video>
 	<canvas id="barcodecanvas" style="display: none;"></canvas>
 	<h2 id="result"></h2>
 
